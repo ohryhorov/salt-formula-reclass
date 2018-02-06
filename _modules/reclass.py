@@ -591,6 +591,8 @@ def node_update(name, classes=None, parameters=None, **connection_args):
     with open(file_path, 'w') as node_file:
         node_file.write(yaml.safe_dump(node_meta, default_flow_style=False))
 
+    __salt__['event.fire']({}, 'pillar_refresh')
+
     return node_get(name)
 
 
